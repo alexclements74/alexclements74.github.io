@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--CSS Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <!-- Favicons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="shortcut icon"
+      href="assets/icons/favicon.png"
+    />
+
+    <!-- Animate CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <title>Alex Clements</title>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav>
+      <h1>ALEX CLEMENTS</h1>
+      <ul class="navigation">
+        <li><a href="#about" class="nav-link">About Me</a></li>
+        <li><a href="#skills" class="nav-link">Skills and Experience</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="burger-menu" id="burger-menu">
+        <ion-icon class="bars" name="menu-outline"></ion-icon>
+        <!-- <ion-icon class="times" name="close-outline"></ion-icon> -->
+      </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+      <img
+        src="assets/images/sample_code.png"
+        alt="sample-code"
+        loading="lazy"
+        class="hero-img"
+      />
+      <div class="bio animate__animated animate__shakeX">
+        <h2 class="bio-title">Alex Clements</h2>
+        <p class="bio-text">
+          I'm a developer and student currently living in Ottawa, Ontario. I have a passion 
+          for making clean and efficient code to solve any given problem. 
+        </p>
+      </div>
+    </section>
+
+    <!-- More about -->
+    <section class="more-about">
+      <!-- <h2>More About Me</h2> -->
+      <p>
+        Some more text should definitely be going here.
+      </p>
+      <p>
+        I'm a 2nd year student enrolled in Computer Engineering at the University of Ottawa!
+      </p>
+      <p>
+        Outside of development, I love to watch sports and play video games in 
+        my freetime. 
+      </p>
+    </section>
+
+    <!-- Skills section -->
+    <section class="skills" id="skills">
+      <h2 class="skill-header">My Top Skills</h2>
+
+      <div class="skills-wrapper">
+        <div class="first-set animate__animated animate__pulse">
+          <a href="https://www.java.com/" target="_blank">
+            <img
+              src="assets/icons/icons8-java.svg"
+              alt="Java Logo"
+              title="Java"
+              loading="lazy"
+              class="icon icon-card"
+            /></a>
+
+          <a href="https://www.python.org/" target="_blank">
+            <img
+              src="assets/icons/icons8-python.svg"
+              alt="Python Logo"
+              title="Python"
+              loading="lazy"
+              class="icon icon-card"
+            /></a>
+        
+          <a href="https://www.javascript.com/" target="_blank">
+            <img
+              src="assets/icons/icons8-javascript.svg"
+              alt="JavaScript Logo"
+              title="JavaScript"
+              loading="lazy"
+              class="icon icon-card"
+            /></a>
+        </div>
+
+        <div class="second-set animate__animated animate__pulse">
+          <a href="https://www.w3schools.com/html/" target="_blank">
+            <img
+              src="assets/icons/icons8-html-5.svg"
+              alt="HTML Logo"
+              title="HTML"
+              loading="lazy"
+              class="icon icon-card"
+            /></a>
+          
+          <a href="https://www.w3schools.com/css/" target="_blank">
+            <img
+              src="assets/icons/icons8-css3.svg"
+              alt="CSS Logo"
+              title="CSS"
+              loading="lazy"
+              class="icon icon-card"
+            /></a>
+
+          <a href="https://getbootstrap.com/" target="_blank">
+            <img
+              src="assets/icons/icons8-bootstrap.svg"
+              alt="Bootstrap Logo"
+              title="Bootstrap"
+              loading="lazy"
+              class="icon icon-card"
+            /></a>
+        </div>
+
+        <div class="third-set animate__animated animate__pulse">
+          <a href="https://www.w3schools.com/c/c_intro.php" target="_blank">
+            <img
+              src="assets/icons/icons8-c-programming.svg"
+              alt="C Logo"
+              title="C"
+              loading="lazy"
+              class="icon icon-card"
+          /></a>
+
+          <a href="https://cplusplus.com/" target="_blank">
+            <img
+              src="assets/icons/icons8-c++.svg"
+              alt="C++ Logo"
+              title="C++"
+              loading="lazy"
+              class="icon icon-card"
+          /></a>
+
+          <a href="https://www.w3schools.com/sql/" target="_blank">
+            <img
+              src="assets/icons/sql.png"
+              alt="SQL Logo"
+              title="SQL"
+              loading="lazy"
+              class="icon icon-card"
+          /></a>
+        </div>
+      </div>
+
+      <p>
+        <br>On top of these skills, I also have experience working with <b>React</b>, 
+        <b>Redux</b>, <b>JavaFX</b>, <b>ES6</b> and <b>Sass</b>.
+
+        <br><br>
+
+        As well, I have familiarity with the <b>Windows</b>, <b>MacOS</b> and <b>Linux</b> operating systems. 
+
+      </p>
+    </section>
+
+    <!-- Projects section -->
+    <section class="projects" id="projects">
+      <h2 class="projects-title">Projects!</h2>
+      <div class="first-set projects-container">
+        <div class="project-container project-card">
+          <img
+            src="assets/images/ledger-photo.png"
+            alt="accounting-ledger"
+            loading="lazy"
+            class="project-pic"
+          />
+          <h3 class="project-title">Accounting Ledger</h3>
+          <p class="project-details">
+            Completed for Claremont Communications, the ledger contained a local, web-based 
+            application in HTML. Developed in <b>Python</b> with the assistance of external
+            libraries such as <b>Flask</b> and <b>pandas</b>. The user is able to input information
+            in a form (as shown in the image above). They can then request a report, shown in the 
+            browser, for specific search query. Lastly, they can download a csv file with their
+            complete results.
+          </p>
+          <!-- <a href="#" target="_blank" class="project-link">Check it Out</a> -->
+        </div>
+        <div class="project-container project-card">
+          <img
+            src="assets/images/file-searcher.png"
+            alt="file-searcher"
+            loading="lazy"
+            class="project-pic"
+          />
+          <h3 class="project-title">Efficient File Searcher</h3>
+          <p class="project-details">
+            Completed for Claremont Communications, this program is able to quickly search for any
+            given file or folder on a drive. Windows search is notoriously slow, so this was made
+            as a way to combat that. Using <b>Java</b> on the back-end, with <b>JavaFX</b> to create the UI,
+
+          </p>
+          <!-- <a href="#" target="_blank" class="project-link">Check it Out</a> -->
+        </div></div>
+      <div class="first-set projects-container">
+        <div class="project-container project-card">
+          <img
+            src="assets/images/blackjack.png"
+            alt="c++-blackjack"
+            loading="lazy"
+            class="project-pic"
+          />
+          <h3 class="project-title">Text-Based Blackjack Game</h3>
+          <p class="project-details">
+            Developed in <b>C++</b>, this simple Blackjack game allows the user to play the famous
+            tabletop game against a bot (the dealer). 
+          </p>
+          <a href="https://github.com/alexclements74/Blackjack" target="_blank" class="project-link">Check it Out!</a>
+        </div>
+
+        <div class="project-container project-card">
+          <img
+            src="assets/images/tic-tac-toe.png"
+            alt="c++-tictactoe"
+            loading="lazy"
+            class="project-pic"
+          />
+          <h3 class="project-title">Text-Based Tic-Tac-Toe Game</h3>
+          <p class="project-details">
+            With a visual board, this <b>C++</b> Tic-Tac-Toe game allows players to play on their own
+            or against a bot. 
+          </p>
+          <a href="https://github.com/alexclements74/Tic-Tac-Toe" target="_blank" class="project-link">Check it Out</a>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <!-- Contact section -->
+    <section class="contact" id="contact">
+      <h2>Get In Touch With Me</h2>
+      <div class="contact-form-container">
+        <div class="contact-form">
+          <form action="https://formspree.io/f/xyylnggw" method="POST">
+            <div class="form-control">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="sender-name"
+                placeholder="Enter Your Name"
+                class="input-field"
+                required
+              />
+            </div>
+            <div class="form-control">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="sender-email"
+                placeholder="Enter Your Email"
+                class="input-field"
+                required
+              />
+            </div>
+            <div class="form-control">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                cols="60"
+                rows="10"
+                placeholder="Enter Your Message"
+                name="message"
+                class="input-field"
+                required
+              ></textarea>
+            </div>
+            <input
+              type="submit"
+              value="Submit"
+              id="submit-btn"
+              class="submit-btn"
+            />
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social accounts - Fixed to the right -->
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/alexclements74/" target="_blank"
+        ><img
+          src="assets/icons/icons8-linkedin-circled.gif"
+          alt="Linkedin"
+          loading="lazy"
+          class="socicon"
+      /></a>
+      <a href="https://github.com/alexclements74" target="_blank"
+        ><img src="assets/icons/icons8-github.gif" 
+          alt="Github" 
+          loading="lazy"
+          class="socicon"
+      /></a>
+    </div>
+
+    <!-- Scroll to top -->
+    <i class="scroll-up" id="scroll-up"
+      ><img
+        src="assets/icons/upward-arrow.gif"
+        class="socicon up-arrow"
+        alt=""
+    /></i>
+
+    <!-- Footer section -->
+    <footer>
+      <p class="copy">&copy; Alex Clements - 2023</p>
+    </footer>
+
+    <!-- Website scripts -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Ion icons scripts -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
