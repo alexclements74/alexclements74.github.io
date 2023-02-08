@@ -134,6 +134,8 @@ nav ul li {
 .more-about {
   padding: 1rem 6rem;
   text-align: center;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 .more-about h2 {
