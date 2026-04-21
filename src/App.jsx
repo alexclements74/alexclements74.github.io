@@ -191,7 +191,7 @@ function App() {
         <section id="experience" className="section">
           <div className="section-header">
             <p className="kicker">Experience</p>
-            <h2>Specific roles and measurable outcomes.</h2>
+            <h2>Specific roles and measurable outcomes</h2>
           </div>
 
           <div className="experience-grid">
@@ -228,11 +228,10 @@ function App() {
         <section id="projects" className="section">
           <div className="section-header">
             <p className="kicker">Projects</p>
-            <h2>Examples of featured work.</h2>
+            <h2>Examples of featured work</h2>
             <p className="section-note">
-              This homepage highlights four featured projects in a focused 2x2
-              format. You can keep adding more projects in the data model and
-              we can wire an all-projects page next.
+              This homepage highlights four featured projects.
+              You can view additional projects on my<b> <a href="https://github.com/alexclements74" target="_blank" rel="noreferrer">GitHub profile</a></b>.
             </p>
           </div>
 
@@ -273,20 +272,12 @@ function App() {
               </article>
             ))}
           </div>
-
-          {additionalProjectCount > 0 ? (
-            <p className="section-note">
-              {additionalProjectCount} additional project
-              {additionalProjectCount > 1 ? 's are' : ' is'} ready for an
-              all-projects page when you want to add one.
-            </p>
-          ) : null}
         </section>
 
         <section id="courses" className="section">
           <div className="section-header">
             <p className="kicker">Courses</p>
-            <h2>Published Udemy courses and teaching focus.</h2>
+            <h2>Published Udemy courses</h2>
           </div>
 
           <div className="courses-grid">
@@ -323,7 +314,7 @@ function App() {
         <section id="skills" className="section">
           <div className="section-header">
             <p className="kicker">Skills</p>
-            <h2>Compact snapshot for recruiter-friendly review.</h2>
+            <h2>Various technologies and methodologies</h2>
           </div>
 
           <div className="skills-grid">
@@ -343,7 +334,7 @@ function App() {
         <section id="education" className="section">
           <div className="section-header">
             <p className="kicker">Education</p>
-            <h2>Formal learning.</h2>
+            <h2>Formal learning</h2>
           </div>
 
           <div className="education-grid">

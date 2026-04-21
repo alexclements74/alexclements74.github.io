@@ -46,104 +46,93 @@ export const focusAreas = [
 export const projectHighlights = [
   {
     featured: true,
-    title: 'Pulse Commerce Dashboard',
+    title: 'Embodied Assistant',
     year: '2026',
     summary:
-      'A modular analytics suite for e-commerce teams with custom reports, KPI alerts, and role-based layouts.',
-    impact: 'Reduced support tickets by 28% after launch.',
+      'Multimodal assistant application for seamless, useful human-computer interaction.',
+    // impact: '',
     image: {
-      src: '/project-pulse-dashboard.svg',
-      alt: 'Analytics dashboard screenshot with KPI cards and charts',
+      src: '/project-embodied-assistant.svg',
+      alt: 'Embodied Assistant UI screenshot',
     },
-    stack: ['React', 'TypeScript', 'TanStack Query', 'Recharts'],
+    stack: ['React', 'TypeScript', 'Python', 'FastAPI', 'PostgreSQL', 'LLMs', 'Speech Recognition'],
     links: [
+    //   {
+    //     label: 'Demo Video',
+    //     url: 'https://example.com',
+    //   },
       {
-        label: 'Case Study',
-        url: 'https://example.com',
-      },
-      {
-        label: 'Code',
-        url: 'https://github.com',
+        label: 'GitHub Repository',
+        url: 'https://github.com/alexclements74/embodied-assistant',
       },
     ],
   },
   {
     featured: true,
-    title: 'Lighthouse Booking Platform',
+    title: 'Supervrket',
     year: '2025',
     summary:
-      'A mobile-first booking flow for service businesses with dynamic pricing and frictionless multi-step checkout.',
-    impact: 'Improved checkout completion by 19%.',
+      'A Unity-based VR game in which you complete various levels as a supermarket cashier.',
+    // impact: '',
     image: {
-      src: '/project-lighthouse-booking.svg',
-      alt: 'Service booking UI screenshot with calendar and checkout flow',
+      src: '/project-supervrket.svg',
+      alt: 'Supervrket VR game screenshot',
     },
-    stack: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
+    stack: ['Unity', 'C++', 'VR', 'C#'],
     links: [
+    //   {
+    //     label: 'Demo Video',
+    //     url: 'https://example.com',
+    //   },
       {
-        label: 'Live Site',
-        url: 'https://example.com',
-      },
-      {
-        label: 'Details',
-        url: 'https://example.com',
+        label: 'GitHub Repository',
+        url: 'https://github.com/alexclements74/supervrket',
       },
     ],
   },
   {
     featured: true,
-    title: 'Signal Portfolio CMS',
-    year: '2024',
+    title: 'Enroll',
+    year: '2022',
     summary:
-      'A lightweight content management setup for portfolio sites with markdown entries and reusable page blocks.',
-    impact: 'Cut content update time from hours to minutes.',
-    stack: ['React', 'Vite', 'Supabase', 'Netlify'],
+      'An Android app for managing and tracking educational courses.',
+    // impact: '',
+    image: {
+      src: '/project-enroll.svg',
+      alt: 'Enroll Android app screenshot',
+    },
+    stack: ['Java', 'Mobile Development', 'Android Studio'],
     links: [
+    //   {
+    //     label: 'Demo',
+    //     url: 'https://example.com',
+    //   },
       {
-        label: 'Demo',
-        url: 'https://example.com',
-      },
-      {
-        label: 'GitHub',
-        url: 'https://github.com',
+        label: 'GitHub Repository',
+        url: 'https://github.com/alexclements74/Enroll',
       },
     ],
   },
   {
     featured: true,
-    title: 'Atlas Field Ops Mobile',
-    year: '2024',
+    title: 'Booker',
+    year: '2022',
     summary:
-      'A cross-platform field operations app for dispatch, inspections, and offline-first reporting.',
-    impact: 'Reduced average on-site reporting time by 31%.',
-    stack: ['React Native', 'Expo', 'GraphQL', 'SQLite'],
+      'A modern hotel booking platform built with a PERN stack.',
+    // impact: '',
+    image: {
+      src: '/project-booker.svg',
+      alt: 'Booker hotel booking platform screenshot',
+    },
+    stack: ['PostgreSQL', 'Express', 'React', 'Node.js', 'JavaScript'],
     links: [
+    //   {
+    //     label: 'Demo Video',
+    //     url: 'https://example.com',
+    //   },
       {
-        label: 'Project Notes',
-        url: 'https://example.com',
-      },
-      {
-        label: 'Code Sample',
-        url: 'https://github.com',
-      },
-    ],
-  },
-  {
-    featured: true,
-    title: 'CareBridge Intake Portal',
-    year: '2023',
-    summary:
-      'A guided intake portal for social services teams with eligibility logic, role permissions, and audit trails.',
-    impact: 'Cut intake completion time from 22 minutes to 11 minutes.',
-    stack: ['React', 'Node.js', 'PostgreSQL', 'Prisma'],
-    links: [
-      {
-        label: 'Overview',
-        url: 'https://example.com',
-      },
-      {
-        label: 'Architecture',
-        url: 'https://example.com',
+        label: 'GitHub Repository',
+        url: 'https://github.com/alexclements74/Booker',
       },
     ],
   },
@@ -198,24 +187,24 @@ export const courses = [
     title: 'Python for Databases: Learning Data Management with Python',
     platform: 'Udemy',
     year: 'Published',
-    description:
-      "Realize Python's potential to connect to and utilize a variety of database management systems.",
+    // description:
+    //   "Realize Python's potential to connect to and utilize a variety of database management systems.",
     summary:
       'A hands-on introduction to data management workflows using Python with practical database integration examples.',
     stats: '4.6 rating • 14 ratings • 2.5 hours • 43 lectures',
-    topics: ['Python', 'SQL', 'Data Management', 'Beginner Friendly'],
+    topics: ['Python', 'SQL', 'Data Management', 'RDBMS Integration'],
     url: 'https://www.udemy.com/course/python-for-databases/',
   },
   {
     title: 'SQL For Beginners - Essential Query Skills',
     platform: 'Udemy',
     year: 'Published',
-    description:
-      'Master SELECT statements, WHERE clauses, aggregates, and joins for effective data retrieval.',
+    // description:
+    //   'Master SELECT statements, WHERE clauses, aggregates, and joins for effective data retrieval.',
     summary:
       'A beginner-focused SQL fundamentals course that emphasizes practical querying patterns used in real projects.',
     stats: '4.2 rating • 11 ratings • 2 hours • 41 lectures',
-    topics: ['SQL', 'Joins', 'Aggregates', 'Database Fundamentals'],
+    topics: ['SQL', 'PostgreSQL', 'RDBMS\'', 'Database Fundamentals'],
     url: 'https://www.udemy.com/course/sql-for-beginners-essential-query-skills/',
   },
 ]
@@ -231,11 +220,15 @@ export const skills = [
   },
   {
     category: 'Data',
-    items: ['PostgreSQL', 'MySQL', 'SQLite', 'Query Optimization', 'Schema Design'],
+    items: ['SQL', 'PostgreSQL', 'MySQL', 'SQLite', 'Power Platform'],
   },
   {
-    category: 'Testing + Quality',
-    items: ['Playwright', 'Unit Testing', 'Code Reviews', 'Performance Tuning'],
+    category: 'Video Game Dev',
+    items: ['Unity', 'C#', 'XR', 'VR', 'Game Design'],
+  },
+  {
+    category: 'Systems',
+    items: ['Windows', 'macOS', 'Linux', 'AWS', 'Oracle Cloud'],
   },
   {
     category: 'Tools + Delivery',
