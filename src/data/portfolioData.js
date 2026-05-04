@@ -55,7 +55,7 @@ export const projectHighlights = [
       'Multimodal assistant application for seamless, useful human-computer interaction.',
     // impact: '',
     image: {
-      src: 'src/assets/embodied-assistant-sample-photo.jpg',
+      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/embodied-assistant-sample-photo.jpg?raw=true',
       alt: 'Embodied Assistant UI screenshot',
     },
     aiDisclaimer:
@@ -80,7 +80,7 @@ export const projectHighlights = [
       'A Unity-based VR game in which you complete various levels as a supermarket cashier.',
     // impact: '',
     image: {
-      src: 'src/assets/supervrket-sample-photo.jpg',
+      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/supervrket-sample-photo.jpg?raw=true',
       alt: 'Supervrket VR game screenshot',
     },
     stack: ['Unity', 'C++', 'VR', 'C#'],
@@ -103,7 +103,7 @@ export const projectHighlights = [
       'An Android app for managing and tracking educational courses.',
     // impact: '',
     image: {
-      src: 'src/assets/enroll-sample-photo.jpg',
+      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/enroll-sample-photo.jpg?raw=true',
       alt: 'Enroll Android app screenshot',
     },
     stack: ['Java', 'Mobile Development', 'Android Studio'],
@@ -126,7 +126,7 @@ export const projectHighlights = [
       'A modern hotel booking platform built with a PERN stack.',
     // impact: '',
     image: {
-      src: 'src/assets/booker-sample-photo.jpg',
+      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/booker-sample-photo.jpg?raw=true',
       alt: 'Booker hotel booking platform screenshot',
     },
     stack: ['PostgreSQL', 'Express', 'React', 'Node.js', 'JavaScript'],
