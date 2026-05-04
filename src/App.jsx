@@ -171,7 +171,7 @@ function App() {
           <div className="section-header">
             <p className="kicker">About</p>
             <h2>
-              Developing products with a mix of visual taste and practical
+              Developing with a mix of visual taste and practical
               engineering.
             </h2>
           </div>

@@ -4,9 +4,9 @@ export const profile = {
   location: 'Ottawa, Ontario, Canada',
   email: 'alex.clements.cci@gmail.com',
   headlineTag: 'Full-Stack Developer • Udemy Instructor',
-  headline: 'Building practical applications for good.',
+  headline: 'Alex Clements',
   intro:
-    'I design and create a variety of digital experiences that help solve real-world problems and people.',
+    'I design and create a variety of digital experiences that help people and solve real-world problems.',
   about:
     'I enjoy working on projects that have a positive impact, whether that\'s improving user experiences, streamlining workflows, or building tools that empower change. I\'m passionate about learning new technologies and assisting others in their development journeys.',
   quickFacts: [
@@ -75,7 +75,7 @@ export const projectHighlights = [
       'A Unity-based VR game in which you complete various levels as a supermarket cashier.',
     // impact: '',
     image: {
-      src: '/project-supervrket.svg',
+      src: 'src/assets/supervrket-sample-photo.jpg',
       alt: 'Supervrket VR game screenshot',
     },
     stack: ['Unity', 'C++', 'VR', 'C#'],
@@ -98,7 +98,7 @@ export const projectHighlights = [
       'An Android app for managing and tracking educational courses.',
     // impact: '',
     image: {
-      src: '/project-enroll.svg',
+      src: 'src/assets/enroll-sample-photo.jpg',
       alt: 'Enroll Android app screenshot',
     },
     stack: ['Java', 'Mobile Development', 'Android Studio'],
@@ -121,7 +121,7 @@ export const projectHighlights = [
       'A modern hotel booking platform built with a PERN stack.',
     // impact: '',
     image: {
-      src: '/project-booker.svg',
+      src: 'src/assets/booker-sample-photo.jpg',
       alt: 'Booker hotel booking platform screenshot',
     },
     stack: ['PostgreSQL', 'Express', 'React', 'Node.js', 'JavaScript'],
