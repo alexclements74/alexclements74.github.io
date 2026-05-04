@@ -1,3 +1,4 @@
+// Tiny bootstrap for the React app. 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'

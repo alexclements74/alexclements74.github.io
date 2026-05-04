@@ -1,3 +1,4 @@
+// Top of page with quick info 
 export const profile = {
   name: 'Alex Clements',
   role: 'Full-Stack Developer',
@@ -25,6 +26,7 @@ export const profile = {
   ],
 }
 
+// Short cards used in the About section
 export const focusAreas = [
   {
     title: 'Design-Focused Frontend',
@@ -43,6 +45,7 @@ export const focusAreas = [
   },
 ]
 
+// Featured projects shown on the homepage
 export const projectHighlights = [
   {
     featured: true,
@@ -52,9 +55,11 @@ export const projectHighlights = [
       'Multimodal assistant application for seamless, useful human-computer interaction.',
     // impact: '',
     image: {
-      src: '/project-embodied-assistant.svg',
+      src: 'src/assets/embodied-assistant-sample-photo.jpg',
       alt: 'Embodied Assistant UI screenshot',
     },
+    aiDisclaimer:
+      "This project explores multimodal AI to assist users in real-world tasks. With that said, I am well aware of the many issues with current genAI systems. I was okay working with them for the project as it was a small-scale prototype. I minimized the usage of genAI as best I could. In addition, I made sure to make as clear as possible that the assistant is just that - an assistant. ",
     stack: ['React', 'TypeScript', 'Python', 'FastAPI', 'PostgreSQL', 'LLMs', 'Speech Recognition'],
     links: [
     //   {
@@ -138,6 +143,7 @@ export const projectHighlights = [
   },
 ]
 
+// Experience / roles
 export const experience = [
   {
     role: 'Curriculum Developer',
@@ -169,6 +175,7 @@ export const experience = [
   },
 ]
 
+// Education entries
 export const education = [
   {
     program: 'Honours BSc Computer Science',
@@ -182,16 +189,17 @@ export const education = [
   // potentially add high school here later
 ]
 
+// Published courses section
 export const courses = [
   {
     title: 'Python for Databases: Learning Data Management with Python',
     platform: 'Udemy',
     year: 'Published',
     // description:
-    //   "Realize Python's potential to connect to and utilize a variety of database management systems.",
+    //   "",
     summary:
       'A hands-on introduction to data management workflows using Python with practical database integration examples.',
-    stats: '4.6 rating • 14 ratings • 2.5 hours • 43 lectures',
+    // stats: '4.6 rating • 14 ratings • 2.5 hours • 43 lectures',
     topics: ['Python', 'SQL', 'Data Management', 'RDBMS Integration'],
     url: 'https://www.udemy.com/course/python-for-databases/',
   },
@@ -200,15 +208,16 @@ export const courses = [
     platform: 'Udemy',
     year: 'Published',
     // description:
-    //   'Master SELECT statements, WHERE clauses, aggregates, and joins for effective data retrieval.',
+    //   "",
     summary:
       'A beginner-focused SQL fundamentals course that emphasizes practical querying patterns used in real projects.',
-    stats: '4.2 rating • 11 ratings • 2 hours • 41 lectures',
+    // stats: '4.2 rating • 11 ratings • 2 hours • 41 lectures',
     topics: ['SQL', 'PostgreSQL', 'RDBMS\'', 'Database Fundamentals'],
     url: 'https://www.udemy.com/course/sql-for-beginners-essential-query-skills/',
   },
 ]
 
+// Skills grouped for recruiter-friendly scanning
 export const skills = [
   {
     category: 'Frontend',
@@ -236,6 +245,7 @@ export const skills = [
   },
 ]
 
+// Contact/social links 
 export const socialLinks = [
   {
     label: 'GitHub',

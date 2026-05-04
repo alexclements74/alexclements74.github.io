@@ -1,3 +1,6 @@
+/*
+  Application styles and theming.
+*/
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Sora:wght@400;500;600;700&display=swap');
 
 :root {
@@ -767,4 +770,42 @@ footer {
   50% {
     box-shadow: 0 0 0 6px transparent;
   }
+}
+
+/* Accessible modal styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 7, 17, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 80;
+  padding: 1.25rem;
+}
+
+.modal {
+  background: var(--surface-strong);
+  border: 1px solid var(--surface-border);
+  padding: 1.25rem;
+  border-radius: 12px;
+  max-width: 680px;
+  width: 100%;
+  box-shadow: 0 24px 80px rgba(2, 7, 17, 0.6);
+}
+
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.modal-body {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }

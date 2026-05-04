@@ -1,3 +1,5 @@
+// Main app entry — renders the single-page portfolio.
+
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import {
@@ -11,6 +13,7 @@ import {
   socialLinks,
 } from './data/portfolioData'
 
+// Section links for the header row
 const sectionLinks = [
   {
     href: '#about',
@@ -42,6 +45,7 @@ const sectionLinks = [
   },
 ]
 
+// Theme toggle info
 const themeInfo = {
   cyber: {
     label: 'Cyber Mode',
@@ -54,6 +58,11 @@ const themeInfo = {
 }
 
 function App() {
+  // App-level refs/state:
+  // - headerRef: measures header to offset anchor scrolling
+  // - modalProject: which project has the AI disclaimer modal open
+  // - modalRef: reference to the modal node for focus management
+  // - lastFocusedRef: remember the element that opened the modal so we can return focus
   const headerRef = useRef(null)
 
   const [theme, setTheme] = useState(() => {
@@ -86,6 +95,8 @@ function App() {
       document.documentElement.style.setProperty('--header-offset', `${offset}px`)
     }
 
+    // We call this once and also observe size changes so the CSS variable
+
     updateHeaderOffset()
 
     let resizeObserver
@@ -104,22 +115,83 @@ function App() {
     }
   }, [])
 
+  // Figure out the other theme for the toggle label.
   const nextTheme = theme === 'cyber' ? 'violet' : 'cyber'
 
+  // Toggle and persist theme.
   const switchTheme = () => {
     setTheme(nextTheme)
   }
 
+  const [modalProject, setModalProject] = useState(null)
+  const modalRef = useRef(null)
+  const lastFocusedRef = useRef(null)
+
+  const openDisclaimer = (project) => {
+    lastFocusedRef.current = document.activeElement
+    setModalProject(project)
+  }
+
+  const closeDisclaimer = () => {
+    setModalProject(null)
+    if (lastFocusedRef.current && typeof lastFocusedRef.current.focus === 'function') {
+      lastFocusedRef.current.focus()
+    }
+  }
+
+  useEffect(() => {
+    if (!modalProject) return
+
+    const node = modalRef.current
+    if (!node) return
+
+    const focusableSelector =
+      'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    const focusable = Array.from(node.querySelectorAll(focusableSelector))
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        closeDisclaimer()
+      }
+      if (e.key === 'Tab') {
+        if (focusable.length === 0) {
+          e.preventDefault()
+          return
+        }
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', onKey)
+
+    // focus first focusable element in dialog
+    window.setTimeout(() => {
+      if (first && typeof first.focus === 'function') first.focus()
+    }, 0)
+
+    return () => {
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [modalProject])
+
+  // Pick the first four featured projects to show on the homepage.
   const featuredProjects = projectHighlights
     .filter((project) => project.featured !== false)
     .slice(0, 4)
-  const additionalProjectCount = Math.max(
-    projectHighlights.length - featuredProjects.length,
-    0,
-  )
+
 
   return (
     <div className="site-shell">
+      <a className="skip-link" href="#main">Skip to main content</a>
       <div className="ambient-layer" aria-hidden="true" />
 
       <header ref={headerRef} className="top-bar">
@@ -142,7 +214,8 @@ function App() {
         </button>
       </header>
 
-      <main>
+      <main id="main">
+        {/* Hero / Intro section */}
         <section id="home" className="section hero-section">
           <p className="kicker">{profile.headlineTag}</p>
           <h1>{profile.headline}</h1>
@@ -167,6 +240,7 @@ function App() {
           </div>
         </section>
 
+        {/* About section */}
         <section id="about" className="section">
           <div className="section-header">
             <p className="kicker">About</p>
@@ -188,6 +262,7 @@ function App() {
           </div>
         </section>
 
+        {/* Experience section */}
         <section id="experience" className="section">
           <div className="section-header">
             <p className="kicker">Experience</p>
@@ -225,6 +300,7 @@ function App() {
           </div>
         </section>
 
+        {/* Projects (featured) */}
         <section id="projects" className="section">
           <div className="section-header">
             <p className="kicker">Projects</p>
@@ -264,16 +340,34 @@ function App() {
 
                 <div className="project-links">
                   {project.links.map((link) => (
-                    <a key={link.label} href={link.url} target="_blank" rel="noreferrer">
+                    <a
+                      key={link.label}
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${link.label} - ${project.title}`}
+                    >
                       {link.label}
                     </a>
                   ))}
+
+                  {project.aiDisclaimer ? (
+                    <button
+                      type="button"
+                      className="btn btn-ghost"
+                      onClick={() => openDisclaimer(project)}
+                      aria-haspopup="dialog"
+                    >
+                      AI Disclaimer
+                    </button>
+                  ) : null}
                 </div>
               </article>
             ))}
           </div>
         </section>
 
+        {/* Courses (published) */}
         <section id="courses" className="section">
           <div className="section-header">
             <p className="kicker">Courses</p>
@@ -311,6 +405,7 @@ function App() {
           </div>
         </section>
 
+        {/* Skills (recruiter-friendly groups) */}
         <section id="skills" className="section">
           <div className="section-header">
             <p className="kicker">Skills</p>
@@ -331,6 +426,7 @@ function App() {
           </div>
         </section>
 
+        {/* Education */}
         <section id="education" className="section">
           <div className="section-header">
             <p className="kicker">Education</p>
@@ -365,6 +461,7 @@ function App() {
           </div>
         </section>
 
+        {/* Contact / Social links */}
         <section id="contact" className="section contact-section">
           <p className="kicker">Contact</p>
           <h2>Have something in mind or looking to hire? Let&apos;s talk!</h2>
@@ -381,6 +478,34 @@ function App() {
           </div>
         </section>
       </main>
+
+      {modalProject ? (
+        <div
+          className="modal-overlay"
+          role="presentation"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) closeDisclaimer()
+          }}
+        >
+          <div
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            ref={modalRef}
+          >
+            <h3 id="modal-title">AI Disclaimer — {modalProject.title}</h3>
+            <div className="modal-body">
+              <p>{modalProject.aiDisclaimer}</p>
+            </div>
+            <div className="modal-actions">
+              <button type="button" className="btn btn-primary" onClick={closeDisclaimer}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       <footer>
         <p>
