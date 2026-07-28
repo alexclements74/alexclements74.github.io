@@ -85,10 +85,10 @@ export const projectHighlights = [
     },
     stack: ['Unity', 'C++', 'VR', 'C#'],
     links: [
-    //   {
-    //     label: 'Demo Video',
-    //     url: 'https://example.com',
-    //   },
+      {
+        label: 'Demo Video',
+        url: 'https://youtu.be/oP-t2HZp_K0',
+      },
       {
         label: 'GitHub Repository',
         url: 'https://github.com/alexclements74/supervrket',
@@ -149,7 +149,7 @@ export const experience = [
     role: 'Curriculum Developer',
     company: 'Claremont Communications',
     location: 'Ottawa, ON',
-    period: '2023 & 2025',
+    period: '2023, 2025 & 2026',
     summary:
       'Developed curriculum materials and published software development courses.',
     highlights: [
@@ -157,11 +157,11 @@ export const experience = [
       'Updated and expanded various pre-existing courses.',
       'Instructed a client on optimal methods for their software systems.',
     ],
-    stack: ['Python', 'PostgreSQL', 'React', 'Node.js'],
+    stack: ['Python', 'PostgreSQL', 'React', 'Node.js', 'AWS', 'Databricks', 'Springboot'],
   },
   {
     role: 'Deputy Information Management Officer',
-    company: 'Department of National Defence (Canada)',
+    company: 'Department of National Defence',
     location: 'Ottawa, ON',
     period: '2024 - 2025',
     summary:
@@ -225,7 +225,7 @@ export const skills = [
   },
   {
     category: 'Backend',
-    items: ['Node.js', 'Express', 'Python', 'REST APIs', 'Auth Patterns'],
+    items: ['Node.js', 'Express', 'Python', 'REST APIs', 'Spring Boot'],
   },
   {
     category: 'Data',
