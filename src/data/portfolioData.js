@@ -261,7 +261,7 @@ export const socialLinks = [
 //   },
   {
     label: 'Resume',
-    url: '_',
+    url: 'https://github.com/alexclements74/alexclements74.github.io/tree/main/src/assets/Alex_Clements_Resume_May_2026.pdf',
   },
   {
     label: 'Udemy',

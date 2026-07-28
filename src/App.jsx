@@ -49,16 +49,20 @@ const sectionLinks = [
 const themeInfo = {
   cyber: {
     label: 'Cyber Mode',
-    short: 'Cyber',
   },
   violet: {
     label: 'Violet Mode',
-    short: 'Violet',
+  },
+  professional: {
+    label: 'Professional Mode',
   },
 }
 
+const themeOrder = ['professional', 'cyber', 'violet']
+
 function App() {
   // App-level refs/state:
+  // Small note: the modal bits are there for the AI disclaimer popup.
   // - headerRef: measures header to offset anchor scrolling
   // - modalProject: which project has the AI disclaimer modal open
   // - modalRef: reference to the modal node for focus management
@@ -68,11 +72,11 @@ function App() {
   const [theme, setTheme] = useState(() => {
     const storedTheme = window.localStorage.getItem('portfolio-theme')
 
-    if (storedTheme === 'cyber' || storedTheme === 'violet') {
+    if (themeOrder.includes(storedTheme)) {
       return storedTheme
     }
 
-    return 'cyber'
+    return 'professional'
   })
 
   useEffect(() => {
@@ -96,6 +100,7 @@ function App() {
     }
 
     // We call this once and also observe size changes so the CSS variable
+    // stays accurate when the header wraps on smaller screens.
 
     updateHeaderOffset()
 
@@ -115,10 +120,9 @@ function App() {
     }
   }, [])
 
-  // Figure out the other theme for the toggle label.
-  const nextTheme = theme === 'cyber' ? 'violet' : 'cyber'
+  // Cycle through the available looks with one button so the top bar stays clean.
+  const nextTheme = themeOrder[(themeOrder.indexOf(theme) + 1) % themeOrder.length]
 
-  // Toggle and persist theme.
   const switchTheme = () => {
     setTheme(nextTheme)
   }
@@ -173,7 +177,7 @@ function App() {
 
     document.addEventListener('keydown', onKey)
 
-    // focus first focusable element in dialog
+    // Put focus into the dialog right away so keyboard users land in the modal.
     window.setTimeout(() => {
       if (first && typeof first.focus === 'function') first.focus()
     }, 0)
@@ -210,7 +214,7 @@ function App() {
 
         <button type="button" className="theme-toggle" onClick={switchTheme}>
           <span>{themeInfo[theme].label}</span>
-          <small>Switch to {themeInfo[nextTheme].short}</small>
+          <small>Switch to {themeInfo[nextTheme].label}</small>
         </button>
       </header>
 
@@ -303,7 +307,7 @@ function App() {
         <section id="projects" className="section">
           <div className="section-header">
             <p className="kicker">Projects</p>
-            <h2>Examples of featured work</h2>
+            <h2>Featured work</h2>
             <p className="section-note">
               This homepage highlights four featured projects.
               You can view additional projects on my<b> <a href="https://github.com/alexclements74" target="_blank" rel="noreferrer">GitHub profile</a></b>.
