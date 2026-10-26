@@ -233,7 +233,7 @@ export const skills = [
   },
   {
     category: 'Video Game Dev',
-    items: ['Unity', 'C#', 'XR', 'VR', 'Game Design'],
+    items: ['Unity', 'C#', 'C++','XR', 'VR', 'Game Design'],
   },
   {
     category: 'Systems',
