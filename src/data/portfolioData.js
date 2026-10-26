@@ -182,8 +182,7 @@ export const education = [
     institution: 'University of Ottawa',
     location: 'Ottawa, ON',
     period: '2021 - 2026',
-    details:
-      'Focused on software design, web application development, databases, and practical team projects.',
+    details: 'Focused on software design, web application development, databases, and practical team projects.',
     coursework: ['Software Engineering', 'Database Design', 'Web Development', 'Algorithms'],
   },
   // potentially add high school here later
@@ -195,11 +194,9 @@ export const courses = [
     title: 'Python for Databases: Learning Data Management with Python',
     platform: 'Udemy',
     year: 'Published',
-    // description:
-    //   "",
     summary:
       'A hands-on introduction to data management workflows using Python with practical database integration examples.',
-    // stats: '4.6 rating • 14 ratings • 2.5 hours • 43 lectures',
+    // stats: ,
     topics: ['Python', 'SQL', 'Data Management', 'RDBMS Integration'],
     url: 'https://www.udemy.com/course/python-for-databases/',
   },
@@ -207,11 +204,9 @@ export const courses = [
     title: 'SQL For Beginners - Essential Query Skills',
     platform: 'Udemy',
     year: 'Published',
-    // description:
-    //   "",
     summary:
       'A beginner-focused SQL fundamentals course that emphasizes practical querying patterns used in real projects.',
-    // stats: '4.2 rating • 11 ratings • 2 hours • 41 lectures',
+    // stats: ,
     topics: ['SQL', 'PostgreSQL', 'RDBMS\'', 'Database Fundamentals'],
     url: 'https://www.udemy.com/course/sql-for-beginners-essential-query-skills/',
   },
@@ -261,7 +256,7 @@ export const socialLinks = [
 //   },
   {
     label: 'Resume',
-    url: 'https://github.com/alexclements74/alexclements74.github.io/tree/main/src/assets/Alex_Clements_Resume_May_2026.pdf',
+    url: 'https://github.com/alexclements74/alexclements74.github.io/tree/main/src/assets/Resume_Alex_Clements_October_2026.pdf',
   },
   {
     label: 'Udemy',
