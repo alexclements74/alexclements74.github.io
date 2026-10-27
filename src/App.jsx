@@ -1,7 +1,6 @@
-// Main app entry — renders the single-page portfolio.
-
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
+import ProjectAtlas from './components/ProjectAtlas'
 import {
   courses,
   education,
@@ -13,123 +12,166 @@ import {
   socialLinks,
 } from './data/portfolioData'
 
-// Section links for the header row
 const sectionLinks = [
-  {
-    href: '#about',
-    label: 'About',
-  },
-  {
-    href: '#experience',
-    label: 'Experience',
-  },
-  {
-    href: '#projects',
-    label: 'Projects',
-  },
-  {
-    href: '#courses',
-    label: 'Courses',
-  },
-  {
-    href: '#skills',
-    label: 'Skills',
-  },
-  {
-    href: '#education',
-    label: 'Education',
-  },
-  {
-    href: '#contact',
-    label: 'Contact',
-  },
+  { href: '#atlas', label: 'Project Map' },
+  { href: '#about', label: 'About' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#work', label: 'Work' },
+  { href: '#contact', label: 'Contact' },
 ]
 
-// Theme toggle info
-const themeInfo = {
-  cyber: {
-    label: 'Cyber Mode',
-  },
-  violet: {
-    label: 'Violet Mode',
-  },
-  professional: {
-    label: 'Professional Mode',
-  },
+function SectionHeading({ eyebrow, title, note }) {
+  return (
+    <div className="section-heading">
+      <span className="kicker">{eyebrow}</span>
+      <h2>{title}</h2>
+      {note ? <p className="section-note">{note}</p> : null}
+    </div>
+  )
 }
 
-const themeOrder = ['professional', 'cyber', 'violet']
+function Header() {
+  const resumeUrl = socialLinks.find((link) => link.label === 'Resume')?.url
+
+  return (
+    <header className="top-bar">
+      <a className="brand" href="#home" aria-label={`${profile.name} home`}>
+        <span className="brand-mark" aria-hidden="true" />
+        <span>{profile.name}</span>
+      </a>
+
+      <nav className="nav-links" aria-label="Primary navigation">
+        {sectionLinks.map((link) => (
+          <a key={link.href} href={link.href}>{link.label}</a>
+        ))}
+      </nav>
+
+      <a className="header-resume" href={resumeUrl} target="_blank" rel="noreferrer">Resume</a>
+    </header>
+  )
+}
+
+function ProjectPreview({ project }) {
+  const primaryLink = project.links[0]
+
+  return (
+    <aside className="atlas-preview" aria-live="polite">
+      {project.image?.src ? (
+        <div className="preview-image-wrap">
+          <img src={project.image.src} alt={project.image.alt || `${project.title} project screenshot`} />
+        </div>
+      ) : <div className="preview-no-image">No project image available.</div>}
+      <p className="preview-index">{project.year}</p>
+      <h3>{project.title}</h3>
+      <p className="preview-summary">{project.summary}</p>
+      {project.impact ? <p className="preview-impact">{project.impact}</p> : null}
+      <ul className="tag-list" aria-label={`${project.title} technologies`}>
+        {project.stack.map((tech) => <li key={tech}>{tech}</li>)}
+      </ul>
+      <a className="text-link" href={primaryLink.url} target="_blank" rel="noreferrer">
+        {primaryLink.label} <span aria-hidden="true">-&gt;</span>
+      </a>
+    </aside>
+  )
+}
+
+function ProjectShowcase({ project, index, onOpenDisclaimer }) {
+  return (
+    <article className={`showcase showcase-${index + 1}`}>
+      <div className="showcase-image-wrap">
+        <img
+          src={project.image?.src}
+          alt={project.image?.alt || `${project.title} project screenshot`}
+          loading={index === 0 ? 'eager' : 'lazy'}
+        />
+      </div>
+      <div className="showcase-copy">
+        <div className="showcase-heading">
+          <span className="project-year">{project.year}</span>
+          <h3>{project.title}</h3>
+        </div>
+        <p>{project.summary}</p>
+        <ul className="tag-list" aria-label={`${project.title} technologies`}>
+          {project.stack.map((tech) => <li key={tech}>{tech}</li>)}
+        </ul>
+        <div className="project-links">
+          {project.links.map((link) => (
+            <a key={link.label} href={link.url} target="_blank" rel="noreferrer">
+              {link.label} <span aria-hidden="true">-&gt;</span>
+            </a>
+          ))}
+          {project.aiDisclaimer ? (
+            <button type="button" className="inline-button" onClick={() => onOpenDisclaimer(project)}>
+              AI note
+            </button>
+          ) : null}
+        </div>
+      </div>
+    </article>
+  )
+}
 
 function App() {
-  // App-level refs/state:
-  // Small note: the modal bits are there for the AI disclaimer popup.
-  // - headerRef: measures header to offset anchor scrolling
-  // - modalProject: which project has the AI disclaimer modal open
-  // - modalRef: reference to the modal node for focus management
-  // - lastFocusedRef: remember the element that opened the modal so we can return focus
   const headerRef = useRef(null)
+  const modalRef = useRef(null)
+  const lastFocusedRef = useRef(null)
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState(0)
+  const [modalProject, setModalProject] = useState(null)
 
-  const [theme, setTheme] = useState(() => {
-    const storedTheme = window.localStorage.getItem('portfolio-theme')
-
-    if (themeOrder.includes(storedTheme)) {
-      return storedTheme
-    }
-
-    return 'professional'
-  })
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-    window.localStorage.setItem('portfolio-theme', theme)
-  }, [theme])
+  const featuredProjects = projectHighlights
+    .filter((project) => project.featured !== false)
+  const safeSelectedProjectIndex = Math.min(selectedProjectIndex, Math.max(featuredProjects.length - 1, 0))
+  const selectedProject = featuredProjects[safeSelectedProjectIndex]
 
   useEffect(() => {
     const updateHeaderOffset = () => {
-      if (!headerRef.current) {
-        return
-      }
-
-      const computedTop = Number.parseFloat(
-        window.getComputedStyle(headerRef.current).top,
-      )
-      const stickyTop = Number.isNaN(computedTop) ? 0 : computedTop
-      const offset = Math.ceil(headerRef.current.offsetHeight + stickyTop + 14)
-
-      document.documentElement.style.setProperty('--header-offset', `${offset}px`)
+      if (!headerRef.current) return
+      document.documentElement.style.setProperty('--header-offset', `${headerRef.current.offsetHeight + 24}px`)
     }
-
-    // We call this once and also observe size changes so the CSS variable
-    // stays accurate when the header wraps on smaller screens.
 
     updateHeaderOffset()
-
-    let resizeObserver
-    if (typeof window.ResizeObserver === 'function' && headerRef.current) {
-      resizeObserver = new window.ResizeObserver(updateHeaderOffset)
-      resizeObserver.observe(headerRef.current)
-    }
-
+    const observer = typeof ResizeObserver === 'function' && headerRef.current
+      ? new ResizeObserver(updateHeaderOffset)
+      : null
+    if (observer) observer.observe(headerRef.current)
     window.addEventListener('resize', updateHeaderOffset)
-
     return () => {
+      observer?.disconnect()
       window.removeEventListener('resize', updateHeaderOffset)
-      if (resizeObserver) {
-        resizeObserver.disconnect()
-      }
     }
   }, [])
 
-  // Cycle through the available looks with one button so the top bar stays clean.
-  const nextTheme = themeOrder[(themeOrder.indexOf(theme) + 1) % themeOrder.length]
+  useEffect(() => {
+    if (!modalProject) return undefined
+    const node = modalRef.current
+    const focusable = node ? Array.from(node.querySelectorAll('button, a[href]')) : []
 
-  const switchTheme = () => {
-    setTheme(nextTheme)
-  }
+    const onKey = (event) => {
+      if (event.key === 'Escape') {
+        setModalProject(null)
+        return
+      }
+      if (event.key === 'Tab' && focusable.length > 0) {
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first.focus()
+        }
+      }
+    }
 
-  const [modalProject, setModalProject] = useState(null)
-  const modalRef = useRef(null)
-  const lastFocusedRef = useRef(null)
+    document.addEventListener('keydown', onKey)
+    document.body.classList.add('modal-open')
+    window.setTimeout(() => focusable[0]?.focus(), 0)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.classList.remove('modal-open')
+    }
+  }, [modalProject])
 
   const openDisclaimer = (project) => {
     lastFocusedRef.current = document.activeElement
@@ -138,344 +180,149 @@ function App() {
 
   const closeDisclaimer = () => {
     setModalProject(null)
-    if (lastFocusedRef.current && typeof lastFocusedRef.current.focus === 'function') {
-      lastFocusedRef.current.focus()
-    }
+    lastFocusedRef.current?.focus?.()
   }
-
-  useEffect(() => {
-    if (!modalProject) return
-
-    const node = modalRef.current
-    if (!node) return
-
-    const focusableSelector =
-      'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-    const focusable = Array.from(node.querySelectorAll(focusableSelector))
-    const first = focusable[0]
-    const last = focusable[focusable.length - 1]
-
-    const onKey = (e) => {
-      if (e.key === 'Escape') {
-        e.preventDefault()
-        closeDisclaimer()
-      }
-      if (e.key === 'Tab') {
-        if (focusable.length === 0) {
-          e.preventDefault()
-          return
-        }
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault()
-          last.focus()
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault()
-          first.focus()
-        }
-      }
-    }
-
-    document.addEventListener('keydown', onKey)
-
-    // Put focus into the dialog right away so keyboard users land in the modal.
-    window.setTimeout(() => {
-      if (first && typeof first.focus === 'function') first.focus()
-    }, 0)
-
-    return () => {
-      document.removeEventListener('keydown', onKey)
-    }
-  }, [modalProject])
-
-  // Pick the first four featured projects to show on the homepage.
-  const featuredProjects = projectHighlights
-    .filter((project) => project.featured !== false)
-    .slice(0, 4)
-
 
   return (
     <div className="site-shell">
       <a className="skip-link" href="#main">Skip to main content</a>
-      <div className="ambient-layer" aria-hidden="true" />
 
-      <header ref={headerRef} className="top-bar">
-        <a className="brand" href="#home">
-          <span className="brand-mark" aria-hidden="true" />
-          {profile.name}
-        </a>
-
-        <nav className="nav-links" aria-label="Primary">
-          {sectionLinks.map((link) => (
-            <a key={link.href} href={link.href}>
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        <button type="button" className="theme-toggle" onClick={switchTheme}>
-          <span>{themeInfo[theme].label}</span>
-          <small>Switch to {themeInfo[nextTheme].label}</small>
-        </button>
-      </header>
+      <div ref={headerRef} className="header-wrap">
+        <Header />
+      </div>
 
       <main id="main">
-        {/* Hero / Intro section */}
-        <section id="home" className="section hero-section">
-          <p className="kicker">{profile.headlineTag}</p>
-          <h1>{profile.headline}</h1>
-          <p className="lede">{profile.intro}</p>
-
-          <div className="hero-actions">
-            <a className="btn btn-primary" href="#projects">
-              View Projects
-            </a>
-            <a className="btn btn-ghost" href={`mailto:${profile.email}`}>
-              Contact Me
-            </a>
+        <section id="home" className="hero section-frame">
+          <div className="hero-copy">
+            <p className="atlas-label">Full-stack developer / Ottawa</p>
+            <h1>Alex Clements.<br /><span>Software Developer.</span></h1>
+            <p className="hero-lede">I build a variety of digital experiences that help people learn, work, and play.</p>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#atlas">View projects <span aria-hidden="true">-&gt;</span></a>
+              <a className="button button-secondary" href="#about">About me</a>
+            </div>
+            <div className="hero-facts" aria-label="Quick facts">
+              {profile.quickFacts.map((fact) => (
+                <div key={fact.label} className="hero-fact">
+                  <strong>{fact.value}</strong>
+                  <span>{fact.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
+        </section>
 
-          <div className="stats-grid">
-            {profile.quickFacts.map((item) => (
-              <article key={item.label} className="stat-card">
-                <h2>{item.value}</h2>
-                <p>{item.label}</p>
+        <section id="atlas" className="atlas-section section-frame">
+          <SectionHeading eyebrow="Project Atlas" title="Things I've built." note="Choose a project to see what it does, how it was made, and where to find it." />
+          <div className="atlas-layout">
+            <ProjectAtlas projects={featuredProjects} selectedIndex={safeSelectedProjectIndex} onSelect={setSelectedProjectIndex} />
+            <ProjectPreview project={selectedProject} />
+          </div>
+        </section>
+
+        <section id="about" className="notes-section section-frame">
+          <SectionHeading eyebrow="About" title="Helping people through software." />
+          <div className="notes-layout">
+            <p className="notes-lede">{profile.about}</p>
+            <div className="focus-grid">
+              {focusAreas.map((area, index) => (
+                <article key={area.title} className="focus-note">
+                  <span className="note-number">0{index + 1}</span>
+                  <h3>{area.title}</h3>
+                  <p>{area.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="experience" className="log-section section-frame">
+          <SectionHeading eyebrow="Experience" title="Where I have worked." />
+          <div className="experience-list">
+            {experience.map((item, index) => (
+              <article key={`${item.company}-${item.role}`} className="log-entry">
+                <div className="log-index">0{index + 1}</div>
+                <div className="log-period">{item.period}</div>
+                <div className="log-content">
+                  <p className="log-company">{item.company} / {item.location}</p>
+                  <h3>{item.role}</h3>
+                  <p>{item.summary}</p>
+                  <ul className="bullet-list">
+                    {item.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+                  </ul>
+                  <ul className="tag-list">
+                    {item.stack.map((tech) => <li key={tech}>{tech}</li>)}
+                  </ul>
+                </div>
               </article>
             ))}
           </div>
         </section>
 
-        {/* About section */}
-        <section id="about" className="section">
-          <div className="section-header">
-            <p className="kicker">About</p>
-            <h2>
-              Helping people through practical engineering.
-            </h2>
-          </div>
-
-          <p className="about-copy">{profile.about}</p>
-
-          <div className="focus-grid">
-            {focusAreas.map((area) => (
-              <article key={area.title} className="focus-card">
-                <h3>{area.title}</h3>
-                <p>{area.description}</p>
-              </article>
+        <section id="work" className="work-section section-frame">
+          <SectionHeading eyebrow="More detail" title="A closer look at the work." note="A few projects, with the context that is available today." />
+          <div className="showcase-list">
+            {featuredProjects.slice(0, 3).map((project, index) => (
+              <ProjectShowcase key={project.title} project={project} index={index} onOpenDisclaimer={openDisclaimer} />
             ))}
           </div>
         </section>
 
-        {/* Experience section */}
-        <section id="experience" className="section">
-          <div className="section-header">
-            <p className="kicker">Experience</p>
-            <h2>Specific roles and measurable outcomes</h2>
-          </div>
-
-          <div className="experience-grid">
-            {experience.map((item) => (
-              <article key={`${item.company}-${item.role}`} className="experience-card">
-                <div className="card-title-row">
+        <section className="learning-section section-frame">
+          <SectionHeading eyebrow="Skills and courses" title="What I work with and teach." />
+          <div className="learning-layout">
+            <div className="skills-groups">
+              {skills.map((group) => (
+                <div key={group.category} className="skill-group">
+                  <h3>{group.category}</h3>
+                  <p>{group.items.join(' / ')}</p>
+                </div>
+              ))}
+            </div>
+            <div className="course-list">
+              {courses.map((course) => (
+                <article key={course.title} className="course-entry">
                   <div>
-                    <h3>{item.role}</h3>
-                    <p className="card-subtitle">
-                      {item.company} • {item.location}
-                    </p>
-                  </div>
-                  <span>{item.period}</span>
-                </div>
-
-                <p>{item.summary}</p>
-
-                <ul className="bullet-list">
-                  {item.highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
-
-                <ul className="tag-list">
-                  {item.stack.map((tech) => (
-                    <li key={tech}>{tech}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* Projects (featured) */}
-        <section id="projects" className="section">
-          <div className="section-header">
-            <p className="kicker">Projects</p>
-            <h2>Featured work</h2>
-            <p className="section-note">
-              This homepage highlights four featured projects.
-              You can view additional projects on my<b> <a href="https://github.com/alexclements74" target="_blank" rel="noreferrer">GitHub profile</a></b>.
-            </p>
-          </div>
-
-          <div className="project-grid">
-            {featuredProjects.map((project) => (
-              <article key={project.title} className="project-card">
-                {project.image?.src ? (
-                  <figure className="project-image">
-                    <img
-                      src={project.image.src}
-                      alt={project.image.alt}
-                      loading="lazy"
-                    />
-                  </figure>
-                ) : null}
-
-                <div className="project-title-row">
-                  <h3>{project.title}</h3>
-                  <span>{project.year}</span>
-                </div>
-
-                <p>{project.summary}</p>
-                <p className="impact">{project.impact}</p>
-
-                <ul className="tag-list">
-                  {project.stack.map((tech) => (
-                    <li key={tech}>{tech}</li>
-                  ))}
-                </ul>
-
-                <div className="project-links">
-                  {project.links.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`${link.label} - ${project.title}`}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-
-                  {project.aiDisclaimer ? (
-                    <button
-                      type="button"
-                      className="btn btn-ghost"
-                      onClick={() => openDisclaimer(project)}
-                      aria-haspopup="dialog"
-                    >
-                      AI Disclaimer
-                    </button>
-                  ) : null}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* Courses (published) */}
-        <section id="courses" className="section">
-          <div className="section-header">
-            <p className="kicker">Courses</p>
-            <h2>Published Udemy courses</h2>
-          </div>
-
-          <div className="courses-grid">
-            {courses.map((course) => (
-              <article key={course.title} className="course-card">
-                <div className="card-title-row">
-                  <div>
+                    <span className="course-platform">{course.platform} / {course.year}</span>
                     <h3>{course.title}</h3>
-                    <p className="card-subtitle">{course.platform}</p>
+                    <p>{course.summary}</p>
                   </div>
-                  <span>{course.year}</span>
-                </div>
-
-                <p>{course.summary}</p>
-
-                {course.stats ? <p className="course-stats">{course.stats}</p> : null}
-
-                <ul className="tag-list">
-                  {course.topics.map((topic) => (
-                    <li key={topic}>{topic}</li>
-                  ))}
-                </ul>
-
-                <div className="project-links">
-                  <a href={course.url} target="_blank" rel="noreferrer">
-                    View Course
-                  </a>
-                </div>
-              </article>
-            ))}
+                  <a className="text-link" href={course.url} target="_blank" rel="noreferrer">View course -&gt;</a>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* Skills (recruiter-friendly groups) */}
-        <section id="skills" className="section">
-          <div className="section-header">
-            <p className="kicker">Skills</p>
-            <h2>Various technologies and methodologies</h2>
-          </div>
-
-          <div className="skills-grid">
-            {skills.map((skillGroup) => (
-              <article key={skillGroup.category} className="skill-card">
-                <h3>{skillGroup.category}</h3>
-                <ul className="tag-list">
-                  {skillGroup.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* Education */}
-        <section id="education" className="section">
-          <div className="section-header">
-            <p className="kicker">Education</p>
-            <h2>Formal learning</h2>
-          </div>
-
-          <div className="education-grid">
+        <section className="education-section section-frame">
+          <SectionHeading eyebrow="Education" title="Education." />
+          <div className="education-list">
             {education.map((item) => (
-              <article
-                key={`${item.institution}-${item.program}`}
-                className="education-card"
-              >
-                <div className="card-title-row">
-                  <div>
-                    <h3>{item.program}</h3>
-                    <p className="card-subtitle">
-                      {item.institution} • {item.location}
-                    </p>
-                  </div>
-                  <span>{item.period}</span>
+              <article key={`${item.institution}-${item.program}`} className="education-entry">
+                <span>{item.period}</span>
+                <div>
+                  <p className="log-company">{item.institution} / {item.location}</p>
+                  <h3>{item.program}</h3>
+                  <p>{item.details}</p>
                 </div>
-
-                <p>{item.details}</p>
-
                 <ul className="tag-list">
-                  {item.coursework.map((topic) => (
-                    <li key={topic}>{topic}</li>
-                  ))}
+                  {item.coursework.map((topic) => <li key={topic}>{topic}</li>)}
                 </ul>
               </article>
             ))}
           </div>
         </section>
 
-        {/* Contact / Social links */}
-        <section id="contact" className="section contact-section">
-          <p className="kicker">Contact</p>
-          <h2>Have something in mind or looking to hire? Let&apos;s talk!</h2>
-          <p>
-            Reach me at <a href={`mailto:${profile.email}`}>{profile.email}</a>.
-          </p>
-
-          <div className="social-links">
+        <section id="contact" className="contact-section section-frame">
+          <div>
+            <p className="atlas-label">Contact</p>
+            <h2>Have something in mind?<br /><span>Let's talk.</span></h2>
+            <p>Reach me at <a href={`mailto:${profile.email}`}>{profile.email}</a>.</p>
+          </div>
+          <div className="contact-links">
             {socialLinks.map((link) => (
               <a key={link.label} href={link.url} target="_blank" rel="noreferrer">
-                {link.label}
+                <span>{link.label}</span><span aria-hidden="true">-&gt;</span>
               </a>
             ))}
           </div>
@@ -483,38 +330,19 @@ function App() {
       </main>
 
       {modalProject ? (
-        <div
-          className="modal-overlay"
-          role="presentation"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) closeDisclaimer()
-          }}
-        >
-          <div
-            className="modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-            ref={modalRef}
-          >
-            <h3 id="modal-title">AI Disclaimer — {modalProject.title}</h3>
-            <div className="modal-body">
-              <p>{modalProject.aiDisclaimer}</p>
-            </div>
-            <div className="modal-actions">
-              <button type="button" className="btn btn-primary" onClick={closeDisclaimer}>
-                Close
-              </button>
-            </div>
+        <div className="modal-overlay" role="presentation" onClick={(event) => event.target === event.currentTarget && closeDisclaimer()}>
+          <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" ref={modalRef}>
+            <p className="atlas-label">FIELD NOTE / CONTENT CONTEXT</p>
+            <h3 id="modal-title">AI note: {modalProject.title}</h3>
+            <p>{modalProject.aiDisclaimer}</p>
+            <button type="button" className="button button-primary" onClick={closeDisclaimer}>Close note</button>
           </div>
         </div>
       ) : null}
 
       <footer>
-        <p>
-          {new Date().getFullYear()} • {profile.name} • {profile.role} •{' '}
-          {profile.location}
-        </p>
+        <span>{new Date().getFullYear()} / {profile.name}</span>
+        <span>Built with React, Vite, and CSS.</span>
       </footer>
     </div>
   )

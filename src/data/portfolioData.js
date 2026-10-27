@@ -1,4 +1,10 @@
-// Top of page with quick info 
+import bookerImage from '../assets/booker-sample-photo.jpg'
+import embodiedAssistantImage from '../assets/embodied-assistant-sample-photo.jpg'
+import enrollImage from '../assets/enroll-sample-photo.jpg'
+import resumeFile from '../assets/Resume_Alex_Clements_October_2026.pdf'
+import supervrketImage from '../assets/supervrket-sample-photo.jpg'
+
+// Top of page with quick info
 export const profile = {
   name: 'Alex Clements',
   role: 'Full-Stack Developer',
@@ -7,7 +13,7 @@ export const profile = {
   headlineTag: 'Full-Stack Developer • Udemy Instructor',
   headline: 'Alex Clements',
   intro:
-    'I design and create a variety of digital experiences that help people and solve real-world problems.',
+    'I build a variety of digital experiences that help people learn, work, and play.',
   about:
     'I enjoy working on projects that have a positive impact, whether that\'s improving user experiences, streamlining workflows, or building tools that empower change. I\'m passionate about learning new technologies and assisting others in their development journeys.',
   quickFacts: [
@@ -48,14 +54,15 @@ export const focusAreas = [
 // Featured projects shown on the homepage
 export const projectHighlights = [
   {
+    id: 'embodied-assistant',
     featured: true,
     title: 'Embodied Assistant',
     year: '2026',
     summary:
-      'Multimodal assistant application for seamless, useful human-computer interaction.',
+      'An assistant that uses visual input and task instructions to help people work through practical tasks.',
     // impact: '',
     image: {
-      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/embodied-assistant-sample-photo.jpg?raw=true',
+      src: embodiedAssistantImage,
       alt: 'Embodied Assistant UI screenshot',
     },
     aiDisclaimer:
@@ -73,6 +80,7 @@ export const projectHighlights = [
     ],
   },
   {
+    id: 'supervrket',
     featured: true,
     title: 'Supervrket',
     year: '2025',
@@ -80,7 +88,7 @@ export const projectHighlights = [
       'A Unity-based VR game in which you complete various levels as a supermarket cashier.',
     // impact: '',
     image: {
-      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/supervrket-sample-photo.jpg?raw=true',
+      src: supervrketImage,
       alt: 'Supervrket VR game screenshot',
     },
     stack: ['Unity', 'C++', 'VR', 'C#'],
@@ -96,6 +104,7 @@ export const projectHighlights = [
     ],
   },
   {
+    id: 'enroll',
     featured: true,
     title: 'Enroll',
     year: '2022',
@@ -103,7 +112,7 @@ export const projectHighlights = [
       'An Android app for managing and tracking educational courses.',
     // impact: '',
     image: {
-      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/enroll-sample-photo.jpg?raw=true',
+      src: enrollImage,
       alt: 'Enroll Android app screenshot',
     },
     stack: ['Java', 'Mobile Development', 'Android Studio'],
@@ -119,14 +128,15 @@ export const projectHighlights = [
     ],
   },
   {
+    id: 'booker',
     featured: true,
     title: 'Booker',
     year: '2022',
     summary:
-      'A modern hotel booking platform built with a PERN stack.',
+      'A hotel booking platform built with PostgreSQL, Express, React, and Node.js.',
     // impact: '',
     image: {
-      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/booker-sample-photo.jpg?raw=true',
+      src: bookerImage,
       alt: 'Booker hotel booking platform screenshot',
     },
     stack: ['PostgreSQL', 'Express', 'React', 'Node.js', 'JavaScript'],
@@ -256,7 +266,7 @@ export const socialLinks = [
 //   },
   {
     label: 'Resume',
-    url: 'https://github.com/alexclements74/alexclements74.github.io/tree/main/src/assets/Resume_Alex_Clements_October_2026.pdf',
+    url: resumeFile,
   },
   {
     label: 'Udemy',
