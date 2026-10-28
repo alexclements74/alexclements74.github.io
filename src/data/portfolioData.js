@@ -1,4 +1,10 @@
-// Top of page with quick info 
+import bookerImage from '../assets/booker-sample-photo.jpg'
+import embodiedAssistantImage from '../assets/embodied-assistant-sample-photo.jpg'
+import enrollImage from '../assets/enroll-sample-photo.jpg'
+import resumeFile from '../assets/Resume_Alex_Clements_October_2026.pdf'
+import supervrketImage from '../assets/supervrket-sample-photo.jpg'
+
+// Top of page with quick info
 export const profile = {
   name: 'Alex Clements',
   role: 'Full-Stack Developer',
@@ -51,11 +57,13 @@ export const projectHighlights = [
     featured: true,
     title: 'Embodied Assistant',
     year: '2026',
+    // other options are: 'in-progress' and 'on-hold'.
+    status: 'completed',
     summary:
       'Multimodal assistant application for seamless, useful human-computer interaction.',
     // impact: '',
     image: {
-      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/embodied-assistant-sample-photo.jpg?raw=true',
+      src: embodiedAssistantImage,
       alt: 'Embodied Assistant UI screenshot',
     },
     aiDisclaimer:
@@ -76,11 +84,12 @@ export const projectHighlights = [
     featured: true,
     title: 'Supervrket',
     year: '2025',
+    status: 'completed',
     summary:
       'A Unity-based VR game in which you complete various levels as a supermarket cashier.',
     // impact: '',
     image: {
-      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/supervrket-sample-photo.jpg?raw=true',
+      src: supervrketImage,
       alt: 'Supervrket VR game screenshot',
     },
     stack: ['Unity', 'C++', 'VR', 'C#'],
@@ -99,11 +108,12 @@ export const projectHighlights = [
     featured: true,
     title: 'Enroll',
     year: '2022',
+    status: 'completed',
     summary:
       'An Android app for managing and tracking educational courses.',
     // impact: '',
     image: {
-      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/enroll-sample-photo.jpg?raw=true',
+      src: enrollImage,
       alt: 'Enroll Android app screenshot',
     },
     stack: ['Java', 'Mobile Development', 'Android Studio'],
@@ -122,11 +132,12 @@ export const projectHighlights = [
     featured: true,
     title: 'Booker',
     year: '2022',
+    status: 'completed',
     summary:
       'A modern hotel booking platform built with a PERN stack.',
     // impact: '',
     image: {
-      src: 'https://github.com/alexclements74/alexclements74.github.io/blob/main/src/assets/booker-sample-photo.jpg?raw=true',
+      src: bookerImage,
       alt: 'Booker hotel booking platform screenshot',
     },
     stack: ['PostgreSQL', 'Express', 'React', 'Node.js', 'JavaScript'],
@@ -256,7 +267,7 @@ export const socialLinks = [
 //   },
   {
     label: 'Resume',
-    url: 'https://github.com/alexclements74/alexclements74.github.io/tree/main/src/assets/Resume_Alex_Clements_October_2026.pdf',
+    url: resumeFile,
   },
   {
     label: 'Udemy',
