@@ -298,12 +298,12 @@ function App() {
 
         <section id="contact" className="contact-section section-frame">
           <div>
-            <p className="eyebrow">Contact</p>
+            {/* <p className="eyebrow">Contact</p> */}
             <h2>Contact</h2>
-            <p>For work, collaboration, or a useful conversation about software.</p>
+            <p>Want to get in touch or see more of my work? Just click one of the links here!</p>
           </div>
           <div className="contact-links">
-            <a href={`mailto:${profile.email}`}>{profile.email}</a>
+            {/* <a href={`mailto:${profile.email}`}>{profile.email}</a> */}
             {socialLinks.filter((link) => link.label !== 'Resume').map((link) => (
               <a key={link.label} href={link.url} target="_blank" rel="noreferrer">{link.label}</a>
             ))}

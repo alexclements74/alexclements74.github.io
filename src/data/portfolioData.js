@@ -254,6 +254,10 @@ export const skills = [
 // Contact/social links 
 export const socialLinks = [
   {
+    label: 'Email',
+    url: 'mailto:alex.clements.cci@gmail.com',
+  },
+  {
     label: 'GitHub',
     url: 'https://github.com/alexclements74',
   },
@@ -261,10 +265,6 @@ export const socialLinks = [
     label: 'LinkedIn',
     url: 'https://www.linkedin.com/in/alexclements74/',
   },
-//   {
-//     label: 'Email',
-//     url: 'mailto:alex.clements.cci@gmail.com',
-//   },
   {
     label: 'Resume',
     url: resumeFile,

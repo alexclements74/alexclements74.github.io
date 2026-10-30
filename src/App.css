@@ -120,7 +120,7 @@ main { display: grid; }
 .intro-links { display: flex; flex-wrap: wrap; gap: 1.3rem; margin-top: 2rem; }
 .primary-link, .secondary-link, .text-link, .text-button { display: inline-flex; align-items: center; gap: 0.35rem; border-bottom: 1px solid var(--accent); color: var(--text); font-weight: 600; }
 .primary-link:hover, .secondary-link:hover, .text-link:hover, .text-button:hover { color: var(--accent); }
-.secondary-link { border-bottom-color: var(--border-strong); color: var(--text-muted); }
+/* .secondary-link { border-bottom-color: var(--border-strong); color: var(--text-muted); } */
 .intro-aside { padding-left: 1.25rem; border-left: 1px solid var(--border-strong); }
 .intro-aside p { margin: 0.9rem 0 0.1rem; color: var(--text-soft); font: 0.68rem var(--mono-font); text-transform: uppercase; }
 .intro-aside p:first-child { margin-top: 0; }
