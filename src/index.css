@@ -45,7 +45,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  font-family: var(--body-font, 'Sora', 'Segoe UI', sans-serif);
+  font-family: var(--body-font, 'IBM Plex Sans', 'Segoe UI', sans-serif);
   background: var(--bg-canvas, #0e1120);
   color: var(--text-primary, #eef3ff);
   line-height: 1.6;
